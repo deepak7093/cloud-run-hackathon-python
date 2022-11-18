@@ -78,7 +78,7 @@ def move():
         # if item['x'] == int(botState['x'] + 1) and botState['direction'] == "S":
         #     return moves['L', 'F', 'T']
 
-    return moves[random.randrange(len(moves))]
+    return moves[random.randrange(['F', 'T'])]
 
 
 if __name__ == "__main__":
