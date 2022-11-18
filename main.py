@@ -65,7 +65,7 @@ def move():
     #     # elif int(botState['x']) == int(data['arena']['dims'][0]) or int(botState['y']) == int(data['arena']['dims'][1]) and botState['direction'] == "W":
     #     #     return  moves[random.randrange(len(moves))]
     #     # TODO : check surrondings
-        
+
     #     # logger.info(json.dump(data['arena']['state'][player]))
 
     for item in otherBotStates:
@@ -82,7 +82,7 @@ def move():
         # if item['x'] == int(botState['x'] + 1) and botState['direction'] == "S":
         #     return moves['L', 'F', 'T']
 
-    return moves[1]
+    return moves[3]
 
 
 if __name__ == "__main__":
