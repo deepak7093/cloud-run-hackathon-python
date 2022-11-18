@@ -46,7 +46,7 @@ def move():
     for player in data['arena']['state'].keys():
         if player == mybot:
             botState = data['arena']['state'][player]
-            if botState['wasHit'] == "True":
+            if botState['wasHit']:
                 print("here")
                 logger.info(botState['wasHit'])
                 logger.info('Got Hit')
