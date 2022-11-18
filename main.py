@@ -34,7 +34,7 @@ def index():
 @app.route("/", methods=['POST'])
 def move():
     request.get_data()
-    # logger.info(request.json)
+    logger.info(request.json)
     data = request.json
 
     # TODO add your implementation here to replace the random response
@@ -48,19 +48,21 @@ def move():
 
     for player in data['arena']['state'].keys():
         if botState['wasHit'] == "True":
-            if int(botState['x']) < int(data['arena']['dims'][0]) or int(botState['y']) < int(data['arena']['dims'][1]) :
+            logger.info('Got Hit')
+            if int(botState['x']) < int(data['arena']['dims'][0]) or int(botState['y']) < int(data['arena']['dims'][1]):
                 return moves[0]
-            elif int(botState['x']) == int(data['arena']['dims'][0]) or int(botState['y']) == int(data['arena']['dims'][1])  and botState['direction'] == "N":
+            elif int(botState['x']) == int(data['arena']['dims'][0]) or int(botState['y']) == int(data['arena']['dims'][1]) and botState['direction'] == "N":
                 return moves[2]
-            elif int(botState['x']) == int(data['arena']['dims'][0]) or int(botState['y']) == int(data['arena']['dims'][1])  and botState['direction'] == "S":
+            elif int(botState['x']) == int(data['arena']['dims'][0]) or int(botState['y']) == int(data['arena']['dims'][1]) and botState['direction'] == "S":
                 return moves[0]
-            elif int(botState['x']) == int(data['arena']['dims'][0]) or int(botState['y']) == int(data['arena']['dims'][1])  and botState['direction'] == "E":
+            elif int(botState['x']) == int(data['arena']['dims'][0]) or int(botState['y']) == int(data['arena']['dims'][1]) and botState['direction'] == "E":
                 return moves[3]
-            elif int(botState['x']) == int(data['arena']['dims'][0]) or int(botState['y']) == int(data['arena']['dims'][1])  and botState['direction'] == "W":
+            elif int(botState['x']) == int(data['arena']['dims'][0]) or int(botState['y']) == int(data['arena']['dims'][1]) and botState['direction'] == "W":
                 return moves[2]
             # TODO : check surrondings
         else:
-            otherBotStates.append(data['arena']['state'][player])
+            # otherBotStates.append(data['arena']['state'][player])
+            return moves[random.randrange(len(moves))]
             # logger.info(json.dump(data['arena']['state'][player]))
 
     for item in otherBotStates:
