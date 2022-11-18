@@ -24,7 +24,7 @@ logger = logging.getLogger(__name__)
 
 app = Flask(__name__)
 moves = ['F', 'T', 'L', 'R']
-hit_moves = ['F', 'L']
+hit_moves = ['F', 'L', 'R', 'F', 'F', 'F']
 
 
 @app.route("/", methods=['GET'])
