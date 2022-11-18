@@ -46,24 +46,25 @@ def move():
     for player in data['arena']['state'].keys():
         if player == mybot:
             botState = data['arena']['state'][player]
+            if botState['wasHit'] == "True":
+                logger.info('Got Hit')
+                return random.choice(hit_moves)
 
     for player in data['arena']['state'].keys():
-        if botState['wasHit'] == "True":
-            logger.info('Got Hit')
-            if int(botState['x']) < int(data['arena']['dims'][0]) or int(botState['y']) < int(data['arena']['dims'][1]):
-                return random.choice(hit_moves)
-            # elif int(botState['x']) == int(data['arena']['dims'][0]) or int(botState['y']) == int(data['arena']['dims'][1]) and botState['direction'] == "N":
-            #     return  moves[random.randrange(len(moves))]
-            # elif int(botState['x']) == int(data['arena']['dims'][0]) or int(botState['y']) == int(data['arena']['dims'][1]) and botState['direction'] == "S":
-            #     return  moves[random.randrange(len(moves))]
-            # elif int(botState['x']) == int(data['arena']['dims'][0]) or int(botState['y']) == int(data['arena']['dims'][1]) and botState['direction'] == "E":
-            #     return  moves[random.randrange(len(moves))]
-            # elif int(botState['x']) == int(data['arena']['dims'][0]) or int(botState['y']) == int(data['arena']['dims'][1]) and botState['direction'] == "W":
-            #     return  moves[random.randrange(len(moves))]
-            # TODO : check surrondings
-        else:
-            otherBotStates.append(data['arena']['state'][player])
-            # logger.info(json.dump(data['arena']['state'][player]))
+
+        # if int(botState['x']) < int(data['arena']['dims'][0]) or int(botState['y']) < int(data['arena']['dims'][1]):
+        #     return random.choice(hit_moves)
+        # elif int(botState['x']) == int(data['arena']['dims'][0]) or int(botState['y']) == int(data['arena']['dims'][1]) and botState['direction'] == "N":
+        #     return  moves[random.randrange(len(moves))]
+        # elif int(botState['x']) == int(data['arena']['dims'][0]) or int(botState['y']) == int(data['arena']['dims'][1]) and botState['direction'] == "S":
+        #     return  moves[random.randrange(len(moves))]
+        # elif int(botState['x']) == int(data['arena']['dims'][0]) or int(botState['y']) == int(data['arena']['dims'][1]) and botState['direction'] == "E":
+        #     return  moves[random.randrange(len(moves))]
+        # elif int(botState['x']) == int(data['arena']['dims'][0]) or int(botState['y']) == int(data['arena']['dims'][1]) and botState['direction'] == "W":
+        #     return  moves[random.randrange(len(moves))]
+        # TODO : check surrondings
+        otherBotStates.append(data['arena']['state'][player])
+        # logger.info(json.dump(data['arena']['state'][player]))
 
     for item in otherBotStates:
         if int(item['x']) == int(botState['x']) and int(item['y']) == int(botState['y']):
