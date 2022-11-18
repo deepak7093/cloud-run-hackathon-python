@@ -61,8 +61,7 @@ def move():
                 return moves[2]
             # TODO : check surrondings
         else:
-            # otherBotStates.append(data['arena']['state'][player])
-            return moves[random.randrange(len(moves))]
+            otherBotStates.append(data['arena']['state'][player])
             # logger.info(json.dump(data['arena']['state'][player]))
 
     for item in otherBotStates:
