@@ -43,14 +43,13 @@ def move():
     botState = {}
     otherBotStates = []
     for player in data['arena']['state'].keys():
-        otherBotStates = {}
         if player == mybot:
             botState = data['arena']['state'][player]
 
     for player in data['arena']['state'].keys():
-        if botState['wasHit'] and int(botState['x']) < int(data['arena']['dims'][0]) and int(botState['y']) < int(data['arena']['dims'][1]):
-
-            return moves[0]
+        if botState['wasHit'] == "True" :
+            if int(botState['x']) < int(data['arena']['dims'][0]) or int(botState['y']) < int(data['arena']['dims'][1]) :
+                return moves[0]
             # TODO : check surrondings
         else:
             otherBotStates.append(data['arena']['state'][player])
@@ -69,7 +68,7 @@ def move():
         #     return moves['R', 'F', 'T']
         # if item['x'] == int(botState['x'] + 1) and botState['direction'] == "S":
         #     return moves['L', 'F', 'T']
-    
+
     return moves[0]
 
 
