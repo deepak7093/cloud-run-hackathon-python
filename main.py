@@ -46,8 +46,11 @@ def move():
     for player in data['arena']['state'].keys():
         if player == mybot:
             botState = data['arena']['state'][player]
-            if botState['wasHit']:
+            if botState['wasHit'] == "True":
+                print("here")
+                logger.info(botState['wasHit'])
                 logger.info('Got Hit')
+                # return "HERE"
                 return random.choice(hit_moves)
         else:
             otherBotStates.append(data['arena']['state'][player])
@@ -82,7 +85,7 @@ def move():
         # if item['x'] == int(botState['x'] + 1) and botState['direction'] == "S":
         #     return moves['L', 'F', 'T']
 
-    return moves[3]
+    return moves[1]
 
 
 if __name__ == "__main__":
