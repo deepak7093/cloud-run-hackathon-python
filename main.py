@@ -47,9 +47,17 @@ def move():
             botState = data['arena']['state'][player]
 
     for player in data['arena']['state'].keys():
-        if botState['wasHit'] == "True" :
+        if botState['wasHit'] == "True":
             if int(botState['x']) < int(data['arena']['dims'][0]) or int(botState['y']) < int(data['arena']['dims'][1]) :
                 return moves[0]
+            elif int(botState['x']) == int(data['arena']['dims'][0]) or int(botState['y']) == int(data['arena']['dims'][1])  and botState['direction'] == "N":
+                return moves[2]
+            elif int(botState['x']) == int(data['arena']['dims'][0]) or int(botState['y']) == int(data['arena']['dims'][1])  and botState['direction'] == "S":
+                return moves[0]
+            elif int(botState['x']) == int(data['arena']['dims'][0]) or int(botState['y']) == int(data['arena']['dims'][1])  and botState['direction'] == "E":
+                return moves[3]
+            elif int(botState['x']) == int(data['arena']['dims'][0]) or int(botState['y']) == int(data['arena']['dims'][1])  and botState['direction'] == "W":
+                return moves[2]
             # TODO : check surrondings
         else:
             otherBotStates.append(data['arena']['state'][player])
