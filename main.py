@@ -17,6 +17,7 @@ import os
 import logging
 import random
 from flask import Flask, request
+import json
 
 logging.basicConfig(level=os.environ.get("LOGLEVEL", "INFO"))
 logger = logging.getLogger(__name__)
@@ -24,19 +25,53 @@ logger = logging.getLogger(__name__)
 app = Flask(__name__)
 moves = ['F', 'T', 'L', 'R']
 
+
 @app.route("/", methods=['GET'])
 def index():
     return "Let the battle begin!"
 
+
 @app.route("/", methods=['POST'])
 def move():
     request.get_data()
-    logger.info(request.json)
-    
+    # logger.info(request.json)
+    data = request.json
+
     # TODO add your implementation here to replace the random response
+
+    mybot = data['_links']['self']['href']
+    botState = {}
+    otherBotStates = []
+    for player in data['arena']['state'].keys():
+        otherBotStates = {}
+        if player == mybot:
+            botState = data['arena']['state'][player]
+
+    for player in data['arena']['state'].keys():
+        if botState['wasHit'] and int(botState['x']) < int(data['arena']['dims'][0]) and int(botState['y']) < int(data['arena']['dims'][1]):
+
+            return moves[0]
+            # TODO : check surrondings
+        else:
+            otherBotStates.append(data['arena']['state'][player])
+            # logger.info(json.dump(data['arena']['state'][player]))
+
+    for item in otherBotStates:
+        if int(item['x']) == int(botState['x']) and int(item['y']) == int(botState['y']):
+            return moves[1]
+        # TODO:  check for nearby bot
+        # if item['x'] == int(botState['x'] + 1) and botState['direction'] == "E":
+        #     return
+        #     return moves['F', 'T']
+        # if item['x'] == int(botState['x'] + 1) and botState['direction'] == "W":
+        #     return moves['R', 'R', 'F', 'T']
+        # if item['x'] == int(botState['x'] + 1) and botState['direction'] == "N":
+        #     return moves['R', 'F', 'T']
+        # if item['x'] == int(botState['x'] + 1) and botState['direction'] == "S":
+        #     return moves['L', 'F', 'T']
     
-    return moves[random.randrange(len(moves))]
+    return moves[0]
+
 
 if __name__ == "__main__":
-  app.run(debug=False,host='0.0.0.0',port=int(os.environ.get('PORT', 8080)))
-  
+    app.run(debug=True, host='0.0.0.0', port=int(os.environ.get('PORT', 8080)))
