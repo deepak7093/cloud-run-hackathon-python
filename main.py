@@ -72,7 +72,13 @@ def move():
     #     # logger.info(json.dump(data['arena']['state'][player]))
 
     for item in otherBotStates:
-        if int(item['x']) == int(botState['x']) and int(item['y']) == int(botState['y']):
+        if botState['direction'] == "E" and int(item['x']) == int(botState['x']) and int(item['y']) > int(botState['y']):
+            return moves[1]
+        if botState['direction'] == "W" and int(item['x']) == int(botState['x']) and int(item['y']) < int(botState['y']):
+            return moves[1]
+        if botState['direction'] == "N" and int(item['y']) == int(botState['y']) and int(item['x']) < int(botState['x']):
+            return moves[1]
+        if botState['direction'] == "S" and int(item['y']) == int(botState['y']) and int(item['x']) > int(botState['x']):
             return moves[1]
         # TODO:  check for nearby bot
         # if item['x'] == int(botState['x'] + 1) and botState['direction'] == "E":
@@ -85,7 +91,7 @@ def move():
         # if item['x'] == int(botState['x'] + 1) and botState['direction'] == "S":
         #     return moves['L', 'F', 'T']
 
-    return moves[1]
+    return moves[0]
 
 
 if __name__ == "__main__":
