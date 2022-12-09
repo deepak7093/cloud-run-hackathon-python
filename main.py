@@ -49,8 +49,8 @@ def move():
             if botState['wasHit']:
                 print("here")
                 logger.info(botState['wasHit'])
-                if int(botState['x']) < int(data['arena']['dims'][0]) and int(botState['y']) < int(data['arena']['dims'][1]):
-                    return random.choice(hit_moves)
+                # if int(botState['x']) < int(data['arena']['dims'][0]) and int(botState['y']) < int(data['arena']['dims'][1]):
+                #     return moves[0]
                 # check hit direction
                 # return "HERE"
                 return random.choice(hit_moves)
