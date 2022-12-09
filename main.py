@@ -25,6 +25,7 @@ logger = logging.getLogger(__name__)
 app = Flask(__name__)
 moves = ['F', 'T', 'L', 'R']
 hit_moves = ['F', 'L', 'F']
+tag_moves = ['T', 'L', 'T', 'F']
 
 
 @app.route("/", methods=['GET'])
@@ -47,15 +48,15 @@ def move():
         if player == mybot:
             botState = data['arena']['state'][player]
             if botState['wasHit']:
-                print("here")
-                logger.info(botState['wasHit'])
-                # if int(botState['x']) < int(data['arena']['dims'][0]) and int(botState['y']) < int(data['arena']['dims'][1]):
-                #     return moves[0]
-                # check hit direction
-                # return "HERE"
+                logger.info("got hit", botState['wasHit'])
                 return random.choice(hit_moves)
-        else:
-            otherBotStates.append(data['arena']['state'][player])
+        # else:
+        #     otherBotStates.append(data['arena']['state'][player])
+    return random.choice(tag_moves)
+
+
+if __name__ == "__main__":
+    app.run(debug=True, host='0.0.0.0', port=int(os.environ.get('PORT', 8080)))
 
     # for player in data['arena']['state'].keys():
 
@@ -73,15 +74,15 @@ def move():
 
     #     # logger.info(json.dump(data['arena']['state'][player]))
 
-    for item in otherBotStates:
-        if botState['direction'] == "E" and int(item['x']) == int(botState['x']) and int(item['y']) > int(botState['y']):
-            return moves[1]
-        if botState['direction'] == "W" and int(item['x']) == int(botState['x']) and int(item['y']) < int(botState['y']):
-            return moves[1]
-        if botState['direction'] == "N" and int(item['y']) == int(botState['y']) and int(item['x']) < int(botState['x']):
-            return moves[1]
-        if botState['direction'] == "S" and int(item['y']) == int(botState['y']) and int(item['x']) > int(botState['x']):
-            return moves[1]
+    # for item in otherBotStates:
+    #     if botState['direction'] == "E" and int(item['x']) == int(botState['x']) and int(item['y']) > int(botState['y']):
+    #         return moves[1]
+    #     if botState['direction'] == "W" and int(item['x']) == int(botState['x']) and int(item['y']) < int(botState['y']):
+    #         return moves[1]
+    #     if botState['direction'] == "N" and int(item['y']) == int(botState['y']) and int(item['x']) < int(botState['x']):
+    #         return moves[1]
+    #     if botState['direction'] == "S" and int(item['y']) == int(botState['y']) and int(item['x']) > int(botState['x']):
+    #         return moves[1]
         # TODO:  check for nearby bot
         # if item['x'] == int(botState['x'] + 1) and botState['direction'] == "E":
         #     return
@@ -93,8 +94,4 @@ def move():
         # if item['x'] == int(botState['x'] + 1) and botState['direction'] == "S":
         #     return moves['L', 'F', 'T']
 
-    return moves[1]
 
-
-if __name__ == "__main__":
-    app.run(debug=True, host='0.0.0.0', port=int(os.environ.get('PORT', 8080)))
