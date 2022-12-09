@@ -24,8 +24,7 @@ logger = logging.getLogger(__name__)
 
 app = Flask(__name__)
 moves = ['F', 'T', 'L', 'R']
-hit_moves = ['F', 'L', 'R']
-score = 0
+hit_moves = ['F', 'L', 'F']
 
 
 @app.route("/", methods=['GET'])
@@ -50,12 +49,9 @@ def move():
             if botState['wasHit']:
                 print("here")
                 logger.info(botState['wasHit'])
-                score = botState['score']
-            else:
-                if score == botState[score]:
-                    return moves[0]
+                if botState['x'] < data['arena']['dims'][0] and botState['y'] < data['arena']:
+                    return random.choice(hit_moves)
                 # check hit direction
-
                 # return "HERE"
                 return random.choice(hit_moves)
         else:
