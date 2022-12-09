@@ -48,7 +48,8 @@ def move():
         if player == mybot:
             botState = data['arena']['state'][player]
             if botState['wasHit']:
-                logger.info("got hit", botState['wasHit'])
+                print("got hit",botState['wasHit'] )
+                # logger.info("got hit", botState['wasHit'])
                 return random.choice(hit_moves)
         # else:
         #     otherBotStates.append(data['arena']['state'][player])
