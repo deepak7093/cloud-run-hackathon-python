@@ -25,7 +25,7 @@ logger = logging.getLogger(__name__)
 app = Flask(__name__)
 moves = ['F', 'T', 'L', 'R']
 hit_moves = ['F', 'L', 'F']
-tag_moves = ['T', 'L', 'T', 'F']
+tag_moves = ['T', 'L', 'T', 'T', 'T']
 
 
 @app.route("/", methods=['GET'])
@@ -83,15 +83,13 @@ if __name__ == "__main__":
     #         return moves[1]
     #     if botState['direction'] == "S" and int(item['y']) == int(botState['y']) and int(item['x']) > int(botState['x']):
     #         return moves[1]
-        # TODO:  check for nearby bot
-        # if item['x'] == int(botState['x'] + 1) and botState['direction'] == "E":
-        #     return
-        #     return moves['F', 'T']
-        # if item['x'] == int(botState['x'] + 1) and botState['direction'] == "W":
-        #     return moves['R', 'R', 'F', 'T']
-        # if item['x'] == int(botState['x'] + 1) and botState['direction'] == "N":
-        #     return moves['R', 'F', 'T']
-        # if item['x'] == int(botState['x'] + 1) and botState['direction'] == "S":
-        #     return moves['L', 'F', 'T']
-
-
+    # TODO:  check for nearby bot
+    # if item['x'] == int(botState['x'] + 1) and botState['direction'] == "E":
+    #     return
+    #     return moves['F', 'T']
+    # if item['x'] == int(botState['x'] + 1) and botState['direction'] == "W":
+    #     return moves['R', 'R', 'F', 'T']
+    # if item['x'] == int(botState['x'] + 1) and botState['direction'] == "N":
+    #     return moves['R', 'F', 'T']
+    # if item['x'] == int(botState['x'] + 1) and botState['direction'] == "S":
+    #     return moves['L', 'F', 'T']
